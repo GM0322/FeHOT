@@ -298,7 +298,7 @@ class GradBlock(torch.nn.Module):
         self.grad1Conv2 = torch.nn.Conv2d(8,8,kernel_size=3,padding=1)
         self.grad1Conv3 = torch.nn.Conv2d(8,2,kernel_size=3,padding=1)
         self.relu = torch.nn.ReLU()
-        self.tanh = torch.nn.Tanh()
+        self.sigmoid = torch.nn.Sigmoid()
         if self.order == 2:
             self.grad2Conv1 = torch.nn.Conv2d(3, 8, kernel_size=3, padding=1)
             self.grad2Conv2 = torch.nn.Conv2d(8, 8, kernel_size=3, padding=1)
@@ -309,12 +309,12 @@ class GradBlock(torch.nn.Module):
         dx1 = self.grad1(x)
         dx1 = self.grad1Conv1(dx1)**2
         dx1 = self.relu(self.grad1Conv2(dx1))
-        dx1 = self.tanh(torch.sqrt(torch.abs(self.grad1Conv3(dx1))))
+        dx1 = self.sigmoid(torch.sqrt(torch.abs(self.grad1Conv3(dx1))+1e-6))-0.5
         if(self.order == 2):
             dx2 = self.grad2(x)
             dx2 = self.grad2Conv1(dx2) ** 2
             dx2 = self.relu(self.grad2Conv2(dx2))
-            dx2 = self.tanh(torch.sqrt(torch.abs(self.grad2Conv3(dx2))))
+            dx2 = self.sigmoid(torch.sqrt(torch.abs(self.grad2Conv3(dx2))+1e-6))-0.5
             dx1 = torch.cat([dx1,dx2],dim=1)
         return dx1
 
