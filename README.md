@@ -19,11 +19,6 @@ Then, set parameters and run the following code:
 python validation.py
 ```
 
-**In addation, considering that the python version runs slowly, we open the c++ source of test process in 'cpp' folder. The average time is about 0.09s for 50 times, and only 0.05s for stable running.**
-
-Note: Need to convert the saved model to traced script module which supported by libtorch. you can run the code of 'model2traced_script_module.py'
-
-
 ## trainning 
 If you want re-train the network parameters, you can train as the following command. 
 ```Shell
