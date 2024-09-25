@@ -22,7 +22,7 @@ python validation.py
 ## trainning 
 If you want re-train the network parameters, you can train as the following command. 
 ```Shell
-python train.py
+python main.py
 ```
 
 ## Contact
