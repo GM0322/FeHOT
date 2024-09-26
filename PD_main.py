@@ -12,7 +12,6 @@ args = config.getParse()
 args.trainData = r'D:\GM\dataset\HOT_TV\AAPM\train\proj'
 args.isNoisy='_noisy'#
 args.iter = 10
-args.batchSize = 8
 args.epoch = 300
 trainData = dataset.ProjAndImageDataloader(args.trainData+args.isNoisy,args.nViews,args.nBins,args.nSize,args.batchSize,True)
 model = network.primal_dual(args.iter,n_primal=5,n_dual=5).to(args.gpuDevice[0])
