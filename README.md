@@ -2,7 +2,7 @@
 
 ## Preparation
 * Prepare python3 environment and install follow package
-* pythorch
+* pytorch
 * numpy==1.22.4
 * os
 * astra
