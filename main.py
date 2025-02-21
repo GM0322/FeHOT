@@ -57,13 +57,9 @@ def train():
     loss_np = np.array([loss for loss in losses])
     loss_np.tofile('./checkpoint/'+args.dataType[0]+'_'+savePath+'_lossupdate.raw')
     torch.save(model.layers,'./checkpoint/'+args.dataType[0]+'_'+savePath+'.pt')
-
-    model.layers = torch.load('./checkpoint/'+args.dataType[0]+'_'+savePath+'.pt', map_location='cuda:{}'.format(args.gpuDevice[0]))
-
-
+    
     trainData = dataset.ProjAndImageDataloader(args.trainData+args.isNoisy,args.nViews,args.nBins,args.nSize,1,False)
     valData = dataset.ProjAndImageDataloader(args.valData+args.isNoisy,args.nViews,args.nBins,args.nSize,1,False)
-
     if(os.path.isdir(args.trainData+'/../'+savePath+args.isNoisy) == False):
         os.mkdir(args.trainData+'/../'+savePath+args.isNoisy)
     if(os.path.isdir(args.valData+'/../'+savePath+args.isNoisy) == False):
